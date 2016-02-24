@@ -28,15 +28,14 @@ public class AutoCompleteServlet extends HttpServlet {
 		resp.setContentType("application/json");
 		PrintWriter out = resp.getWriter(); 
 		
-		List<PersoBean> l = Init.persos
+		List<PersoBean> listeBeans = Init.persos
 				.stream()
 				.map(c -> com.catamania.util.Characters.toPersoBean(c))
-				.filter(perso -> perso!= null && perso.getNom() != null && perso.getNom().startsWith(q))
+				.filter(perso -> perso.getNom().startsWith(q))
 				.collect(Collectors.toList());
 
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		String json = gson.toJson(l);
-		
+		String json = gson.toJson(listeBeans);
 		out.print(json);
 		out.flush();
 	}

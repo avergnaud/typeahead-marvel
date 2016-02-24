@@ -26,14 +26,16 @@ public class Init implements ServletContextListener {
 		CharactersAPI api = CharactersAPI
 				.configureKeys("ac627b5a9da2dd5127e9583595c671f9",
 						"c2110625d1f04ad9cf37d57cd2e9e4e2bddc6fc1")
-				.configureProxyHost("px-internet")
-				.configureProxyPort("80")
-				.limiteMarvel(10).init();
+				.configureProxyHost("proxy")/*optional*/
+				.configureProxyPort("80")/*optional*/
+				.limiteMarvel(50)/*optional*/
+				.init();
 
 		CharactersRequest firstRequest = api.requestBuilder()
-				.limite(2000)
+				.limite(2000)/*optional*/
 				.build();
 
+		/*alimente la liste pour autocomplétion*/
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
